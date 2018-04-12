@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.xjs.ezprofiler.Interceptor.ProfileInfoHolder;
@@ -33,7 +33,7 @@ public class EzProfilerController {
 	@Value("${ezprofiler.url}")
 	 private String url;
 	
-	@GetMapping("${ezprofiler.url:" + DEFAULT_URL + "}")
+	@RequestMapping("${ezprofiler.url:" + DEFAULT_URL + "}")
 	public Map<String, Object> ezprofiler(HttpServletRequest request, HttpServletResponse response) {
 		boolean enableBasic = properties.isEnableBasic();
 		if(!enableBasic) {
