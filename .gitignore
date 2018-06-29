@@ -2,3 +2,8 @@
 /ezprofiler/ezprofiler-spring-boot-starter/*.gitignore
 /ezprofiler/ezprofiler-spring-boot-starter/*.project
 /ezprofiler/ezprofiler-spring-boot-starter/.settings
+/ezprofiler/ezprofiler-client/*.classpath
+/ezprofiler/ezprofiler-client/*.gitignore
+/ezprofiler/ezprofiler-client/*.project
+/ezprofiler/ezprofiler-client/.settings
+/ezprofiler/ezprofiler-client/bin
