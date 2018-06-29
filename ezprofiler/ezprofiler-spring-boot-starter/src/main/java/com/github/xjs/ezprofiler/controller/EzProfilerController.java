@@ -11,9 +11,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.xjs.ezprofiler.Interceptor.ProfileInfoHolder;
 import com.github.xjs.ezprofiler.annotation.Profiler;
 import com.github.xjs.ezprofiler.config.EzProfilerProperties;
+import com.github.xjs.ezprofiler.scanner.ProfileInfoHolder;
 import com.github.xjs.ezprofiler.util.WebUtil;
 
 /**

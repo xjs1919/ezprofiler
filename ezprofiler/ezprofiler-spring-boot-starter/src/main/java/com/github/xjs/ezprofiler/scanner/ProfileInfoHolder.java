@@ -1,4 +1,4 @@
-package com.github.xjs.ezprofiler.Interceptor;
+package com.github.xjs.ezprofiler.scanner;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -7,8 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-import org.springframework.web.method.HandlerMethod;
 
 /**
  * @author 605162215@qq.com
@@ -27,9 +25,8 @@ public class ProfileInfoHolder {
 		long useTime = endAt - startAt;
 		String uri = pi.getUri();
 		boolean occurError = pi.isOccurError();
-		HandlerMethod hm = pi.getHandlerMethod();
-		Class<?> controllerClazz = hm.getBeanType();
-		Method method = hm.getMethod();
+		Class<?> controllerClazz = pi.getClazz();
+		Method method = pi.getMethod();
 		ControllerAccessInfo cai = map.get(controllerClazz);
 		if(cai == null) {
 			cai = new ControllerAccessInfo();

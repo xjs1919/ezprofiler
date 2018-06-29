@@ -1,6 +1,6 @@
-package com.github.xjs.ezprofiler.Interceptor;
+package com.github.xjs.ezprofiler.scanner;
 
-import org.springframework.web.method.HandlerMethod;
+import java.lang.reflect.Method;
 
 /**
  * @author 605162215@qq.com
@@ -12,7 +12,8 @@ public class ProfileInfo {
 	private long start;
 	private long end;
 	private boolean occurError;
-	private HandlerMethod method;
+	private Class<?> clazz;
+	private Method method;
 	public String getUri() {
 		return uri;
 	}
@@ -37,10 +38,16 @@ public class ProfileInfo {
 	public void setOccurError(boolean occurError) {
 		this.occurError = occurError;
 	}
-	public HandlerMethod getHandlerMethod() {
+	public Class<?> getClazz() {
+		return clazz;
+	}
+	public void setClazz(Class<?> clazz) {
+		this.clazz = clazz;
+	}
+	public Method getMethod() {
 		return method;
 	}
-	public void setHandlerMethod(HandlerMethod handlerMethod) {
-		this.method = handlerMethod;
+	public void setMethod(Method method) {
+		this.method = method;
 	}
 }	

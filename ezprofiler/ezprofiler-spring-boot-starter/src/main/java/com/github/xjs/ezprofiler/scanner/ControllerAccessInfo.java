@@ -1,4 +1,4 @@
-package com.github.xjs.ezprofiler.Interceptor;
+package com.github.xjs.ezprofiler.scanner;
 
 import java.util.List;
 
