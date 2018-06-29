@@ -1,4 +1,4 @@
-package com.github.xjs.service;
+package com.test.service;
 
 import org.springframework.stereotype.Service;
 

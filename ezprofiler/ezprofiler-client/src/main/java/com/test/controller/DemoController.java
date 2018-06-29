@@ -1,4 +1,4 @@
-package com.github.xjs.controller;
+package com.test.controller;
 
 import java.util.Random;
 
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.xjs.ezprofiler.annotation.Profiler;
-import com.github.xjs.service.UserService;
+import com.test.service.UserService;
 
 /**
  * @author 605162215@qq.com
