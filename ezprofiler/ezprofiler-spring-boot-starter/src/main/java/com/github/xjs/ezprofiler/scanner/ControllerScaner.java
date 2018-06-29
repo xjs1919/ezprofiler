@@ -2,14 +2,14 @@ package com.github.xjs.ezprofiler.scanner;
 
 import java.lang.reflect.Method;
 
+import org.aopalliance.intercept.MethodInterceptor;
+import org.aopalliance.intercept.MethodInvocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.cglib.proxy.Enhancer;
-import org.springframework.cglib.proxy.MethodInterceptor;
-import org.springframework.cglib.proxy.MethodProxy;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
@@ -39,7 +39,7 @@ public class ControllerScaner implements BeanPostProcessor{
 	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
 		return bean;
 	}
-	
+
 	/**
 	 * 拦截Controller和RestController类，生成他们的子类
 	 * */
@@ -63,21 +63,22 @@ public class ControllerScaner implements BeanPostProcessor{
 			return bean;
 		}
 		log.info("find controller:{}", beanName);
-		Enhancer enhancer = new Enhancer();
-        enhancer.setSuperclass(beanClass);
-        enhancer.setCallback(new MethodInterceptor() {
-			public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
+		ProxyFactory proxyFactory = new ProxyFactory();
+        proxyFactory.setTarget(bean);
+        proxyFactory.addAdvice(new MethodInterceptor() {
+			public Object invoke(MethodInvocation invocation) throws Throwable {
+				Method method = invocation.getMethod();
 				Profiler methodProfiler = AnnotationUtils.findAnnotation(method, Profiler.class);
 				//方法上没有启用
 				if(methodProfiler != null && !methodProfiler.enable()) {
-					return proxy.invokeSuper(obj, args);
+					return method.invoke(bean, invocation.getArguments());
 				}
 				//不是一个requestMapping方法
 				GetMapping getMappingAnnotation = AnnotationUtils.findAnnotation(method, GetMapping.class);
 				PostMapping postMappingAnnotation = AnnotationUtils.findAnnotation(method, PostMapping.class);
 				RequestMapping requestMappingAnnotation = AnnotationUtils.findAnnotation(method, RequestMapping.class);
 				if(requestMappingAnnotation == null && getMappingAnnotation == null && postMappingAnnotation == null) {
-					return proxy.invokeSuper(obj, args);
+					return method.invoke(bean, invocation.getArguments());
 				}
 				//开始统计
 				String uri = null;
@@ -95,7 +96,7 @@ public class ControllerScaner implements BeanPostProcessor{
 						throw new RuntimeException("impossible");
 					}
 					startAt = System.currentTimeMillis();
-					Object result = proxy.invokeSuper(obj, args);
+					Object result = method.invoke(bean, invocation.getArguments());
 					endAt = System.currentTimeMillis();
 					occurError = false;
 					return result;
@@ -116,6 +117,7 @@ public class ControllerScaner implements BeanPostProcessor{
 				}
 			}
         });
-		return enhancer.create();
+        return proxyFactory.getProxy();
 	}
+
 }

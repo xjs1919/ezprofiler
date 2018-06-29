@@ -2,10 +2,12 @@ package com.github.xjs.controller;
 
 import java.util.Random;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.xjs.ezprofiler.annotation.Profiler;
+import com.github.xjs.service.UserService;
 
 /**
  * @author 605162215@qq.com
@@ -45,6 +47,14 @@ public class DemoController {
 	@Profiler(false)
 	public String world() {
 		return "world";
+	}
+	
+	@Autowired
+	UserService userService;
+	
+	@GetMapping("/user")
+	public String user() {
+		return userService.getUserId();
 	}
 	
 }
