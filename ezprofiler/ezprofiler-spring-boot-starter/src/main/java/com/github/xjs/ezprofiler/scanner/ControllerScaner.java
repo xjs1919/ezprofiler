@@ -32,7 +32,7 @@ public class ControllerScaner implements BeanPostProcessor{
 	private static Logger log = LoggerFactory.getLogger(ControllerScaner.class);
 	
 	@Autowired
-	EzProfilerProperties properties;
+	private EzProfilerProperties properties;
 	
 	private ProfilerQueue queue = new ProfilerQueue();
 	
@@ -46,6 +46,10 @@ public class ControllerScaner implements BeanPostProcessor{
 	public Object postProcessAfterInitialization(final Object bean, final String beanName) throws BeansException {
 		final Class<?> beanClass = bean.getClass();
 		final String beanClassName = beanClass.getName();
+		String basePackage = properties.getBasePackage();
+		if(!beanClassName.startsWith(basePackage)) {
+			return bean;
+		}
 		if(beanClassName.startsWith("org.springframework") || beanClassName.indexOf("EzProfilerController")>=0) {
 			return bean;
 		}
