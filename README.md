@@ -12,17 +12,7 @@
   <version>0.0.1-SNAPSHOT</version>
 </dependency>
 ```
-2. 在自己的项目中添加拦截器EzProfilerInterceptor
-```java
-@Configuration
-public class WebConfig extends WebMvcConfigurerAdapter {
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new EzProfilerInterceptor()).addPathPatterns("/**");
-	}
-}
-```
-3.项目启动以后，访问浏览器 http://localhost:8080/profiler , 输出结果类似：
+2.项目启动以后，访问浏览器 http://localhost:8080/profiler , 输出结果类似：
 ```json
 {
 	"DemoController": [{
@@ -66,15 +56,7 @@ ezprofiler.password=123456
 ```html
 ezprofiler.url=/my/profiler
 ```
-4. 如果自定了全局的异常处理器拦截了错误的请求，需要在request种设置EzProfilerInterceptor.REQUEST_ATTR_NAME_OCCUR_ERROR为true，否则会认为本次请求是正常请求
-```java
-@ControllerAdvice
-@ResponseBody
-public class GlobalExceptionHandler {
-	@ExceptionHandler(value= {Exception.class, RuntimeException.class} )  
-	public String allExceptionHandler(HttpServletRequest request, Exception exception) throws Exception{  
-		request.setAttribute(EzProfilerInterceptor.REQUEST_ATTR_NAME_OCCUR_ERROR, true);	
-		return "服务端异常";
-	}  
-}
+4.可以自定义要扫描的controller的base package，默认是com
+```html
+ezprofiler.basepackage=com.github.xjs.controller
 ```
