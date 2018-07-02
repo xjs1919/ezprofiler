@@ -12,7 +12,14 @@
   <version>0.0.1-SNAPSHOT</version>
 </dependency>
 ```
-2.项目启动以后，访问浏览器 http://localhost:8080/profiler , 输出结果类似：
+2. 添加配置
+```java
+@EnableProfiler
+@Configuration
+public class EzProfilerConfigure {
+}
+```
+3.项目启动以后，访问浏览器 http://localhost:8080/profiler , 输出结果类似：
 ```json
 {
 	"DemoController": [{
