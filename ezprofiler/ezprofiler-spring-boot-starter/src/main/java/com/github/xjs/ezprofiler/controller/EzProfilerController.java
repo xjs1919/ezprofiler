@@ -6,12 +6,11 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.xjs.ezprofiler.annotation.Profiler;
+import com.github.xjs.ezprofiler.annotation.PropertySourcedMapping;
 import com.github.xjs.ezprofiler.config.EzProfilerProperties;
 import com.github.xjs.ezprofiler.scanner.ProfileInfoHolder;
 import com.github.xjs.ezprofiler.util.WebUtil;
@@ -25,15 +24,16 @@ import com.github.xjs.ezprofiler.util.WebUtil;
 @Profiler(false)
 public class EzProfilerController {
 	
-	private static final String DEFAULT_URL = "/profiler";
+	public static final String DEFAULT_URL = "/profiler";
 	
-	@Autowired
-	EzProfilerProperties properties;
+	private EzProfilerProperties properties;
 	
-	@Value("${ezprofiler.url}")
-	 private String url;
+	public EzProfilerController(EzProfilerProperties properties) {
+		this.properties = properties;
+	}	
 	
-	@RequestMapping("${ezprofiler.url:" + DEFAULT_URL + "}")
+	@RequestMapping(DEFAULT_URL)
+	@PropertySourcedMapping(propertyKey="ezprofiler.url",value="${ezprofiler.url}")
 	public Map<String, Object> ezprofiler(HttpServletRequest request, HttpServletResponse response) {
 		boolean enableBasic = properties.isEnableBasic();
 		if(!enableBasic) {

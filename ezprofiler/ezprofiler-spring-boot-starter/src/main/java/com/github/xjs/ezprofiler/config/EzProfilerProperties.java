@@ -11,19 +11,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class EzProfilerProperties {
 	
-		@Value("${ezprofiler.enableBasic}")
+		@Value("${ezprofiler.enableBasic:true}")
 		private boolean enableBasic = true;
 		
-		@Value("${ezprofiler.username}")
+		@Value("${ezprofiler.username:ezprofiler-admin}")
 		private String username = "ezprofiler-admin";
 		
-		@Value("${ezprofiler.password}")
+		@Value("${ezprofiler.password:ezprofiler-admin}")
 		private String password = "ezprofiler-admin";
 		
-		@Value("${ezprofiler.url}")
+		@Value("${ezprofiler.url:/profiler}")
 		private String url = "/profiler";
 		
-		@Value("${ezprofiler.basepackage}")
 		private String basePackage="com";
 		
 		public boolean isEnableBasic() {
