@@ -8,6 +8,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.web.servlet.HandlerMapping;
 
 import com.github.xjs.ezprofiler.controller.EzProfilerController;
+import com.github.xjs.ezprofiler.mapping.PropertySourcedRequestMappingHandlerMapping;
 
 /**
  * @author 605162215@qq.com

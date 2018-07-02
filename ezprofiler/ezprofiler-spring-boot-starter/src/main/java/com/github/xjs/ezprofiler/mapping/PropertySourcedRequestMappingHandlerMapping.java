@@ -1,4 +1,4 @@
-package com.github.xjs.ezprofiler.config;
+package com.github.xjs.ezprofiler.mapping;
 
 import java.lang.reflect.Method;
 import java.util.LinkedHashMap;
@@ -20,8 +20,6 @@ import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.util.UriTemplate;
-
-import com.github.xjs.ezprofiler.annotation.PropertySourcedMapping;
 
 /**
  * @author 605162215@qq.com

@@ -1,4 +1,4 @@
-package com.github.xjs.ezprofiler.annotation;
+package com.github.xjs.ezprofiler.mapping;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
