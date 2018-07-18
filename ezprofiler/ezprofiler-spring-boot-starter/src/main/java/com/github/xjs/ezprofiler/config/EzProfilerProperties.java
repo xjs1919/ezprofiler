@@ -23,6 +23,7 @@ public class EzProfilerProperties {
 		@Value("${ezprofiler.url:/profiler}")
 		private String url = "/profiler";
 		
+		@Value("${ezprofiler.basepackage:com}")
 		private String basePackage="com";
 		
 		public boolean isEnableBasic() {
