@@ -17,6 +17,7 @@ public class MethodAccessInfo {
 	private long minMills;
 	private long maxMills;
 	private long avgMills;
+	private Date maxInvokeAt;
 	//当天的调用信息
 	private long todayCount;
 	private long todayOkCount;
@@ -24,9 +25,10 @@ public class MethodAccessInfo {
 	private long todayMinMills;
 	private long todayMaxMills;
 	private long todayAvgMills;
+	private Date todayMaxInvokeAt;
 	//上一次的调用信息
 	private long lastMills;
-	private Date lastInvokeTime;
+	private Date lastInvokeAt;
 	public String getMethod() {
 		return method;
 	}
@@ -117,11 +119,22 @@ public class MethodAccessInfo {
 	public void setLastMills(long lastMills) {
 		this.lastMills = lastMills;
 	}
-	public Date getLastInvokeTime() {
-		return lastInvokeTime;
+	public Date getLastInvokeAt() {
+		return lastInvokeAt;
 	}
-	public void setLastInvokeTime(Date lastInvokeTime) {
-		this.lastInvokeTime = lastInvokeTime;
+	public void setLastInvokeAt(Date lastInvokeTime) {
+		this.lastInvokeAt = lastInvokeTime;
 	}
-	
+	public Date getMaxInvokeAt() {
+		return maxInvokeAt;
+	}
+	public void setMaxInvokeAt(Date maxInvokeAt) {
+		this.maxInvokeAt = maxInvokeAt;
+	}
+	public Date getTodayMaxInvokeAt() {
+		return todayMaxInvokeAt;
+	}
+	public void setTodayMaxInvokeAt(Date todayMaxInvokeAt) {
+		this.todayMaxInvokeAt = todayMaxInvokeAt;
+	}
 }

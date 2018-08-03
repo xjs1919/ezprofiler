@@ -39,7 +39,7 @@ public class ProfileInfoHolder {
 			cai.setMethodInfos(mais);
 		}
 		MethodAccessInfo mai = getMethodAccessInfo(mais, method);
-		if(mai == null) {
+		if(mai == null) {//第一次调用
 			mai = new MethodAccessInfo();
 			mai.setMethod(method.getName());
 			mai.setUri(uri);
@@ -55,12 +55,14 @@ public class ProfileInfoHolder {
 			mai.setMinMills(useTime);
 			mai.setMaxMills(useTime);
 			mai.setAvgMills(useTime);
+			mai.setMaxInvokeAt(new Date());
 			mai.setTodayMinMills(useTime);
 			mai.setTodayMaxMills(useTime);
 			mai.setTodayAvgMills(useTime);
+			mai.setTodayMaxInvokeAt(new Date());
 			mais.add(mai);
-		}else {
-			Date lastInvokeTime = mai.getLastInvokeTime();
+		}else {//之前已经有调用
+			Date lastInvokeTime = mai.getLastInvokeAt();
 			Date now = new Date();
 			if(lastInvokeTime.getMonth() != now.getMonth() || lastInvokeTime.getDay() != now.getDay()) {//第二天重新计算
 				mai.setTodayCount(0);
@@ -78,9 +80,11 @@ public class ProfileInfoHolder {
 			}
 			if(useTime > mai.getMaxMills()) {
 				mai.setMaxMills(useTime);
+				mai.setMaxInvokeAt(new Date());
 			}
 			if(useTime > mai.getTodayMaxMills()) {
 				mai.setTodayMaxMills(useTime);
+				mai.setTodayMaxInvokeAt(new Date());
 			}
 			mai.setInvokeCount(mai.getInvokeCount() + 1);
 			mai.setTodayCount(mai.getTodayCount() + 1);
@@ -93,8 +97,9 @@ public class ProfileInfoHolder {
 			}
 			mai.setAvgMills((mai.getAvgMills()+useTime)/2);
 			mai.setTodayAvgMills((mai.getTodayAvgMills()+useTime)/2);
+			
 		}
-		mai.setLastInvokeTime(new Date());
+		mai.setLastInvokeAt(new Date());
 		mai.setLastMills(useTime);
 	}
 	
