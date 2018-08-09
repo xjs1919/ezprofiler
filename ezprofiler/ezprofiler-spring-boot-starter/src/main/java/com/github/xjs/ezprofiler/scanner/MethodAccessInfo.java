@@ -18,14 +18,14 @@ public class MethodAccessInfo {
 	private long maxMills;
 	private long avgMills;
 	private Date maxInvokeAt;
-	//当天的调用信息
-	private long todayCount;
-	private long todayOkCount;
-	private long todayErrorCount;
-	private long todayMinMills;
-	private long todayMaxMills;
-	private long todayAvgMills;
-	private Date todayMaxInvokeAt;
+	//最近一天的调用信息
+	private long lastDayCount;
+	private long lastDayOkCount;
+	private long lastDayErrorCount;
+	private long lastDayMinMills;
+	private long lastDayMaxMills;
+	private long lastDayAvgMills;
+	private Date lastDayMaxInvokeAt;
 	//上一次的调用信息
 	private long lastMills;
 	private Date lastInvokeAt;
@@ -77,41 +77,53 @@ public class MethodAccessInfo {
 	public void setAvgMills(long avgMills) {
 		this.avgMills = avgMills;
 	}
-	public long getTodayCount() {
-		return todayCount;
+	public Date getMaxInvokeAt() {
+		return maxInvokeAt;
 	}
-	public void setTodayCount(long todayCount) {
-		this.todayCount = todayCount;
+	public void setMaxInvokeAt(Date maxInvokeAt) {
+		this.maxInvokeAt = maxInvokeAt;
 	}
-	public long getTodayOkCount() {
-		return todayOkCount;
+	public long getLastDayCount() {
+		return lastDayCount;
 	}
-	public void setTodayOkCount(long todayOkCount) {
-		this.todayOkCount = todayOkCount;
+	public void setLastDayCount(long lastDayCount) {
+		this.lastDayCount = lastDayCount;
 	}
-	public long getTodayErrorCount() {
-		return todayErrorCount;
+	public long getLastDayOkCount() {
+		return lastDayOkCount;
 	}
-	public void setTodayErrorCount(long todayErrorCount) {
-		this.todayErrorCount = todayErrorCount;
+	public void setLastDayOkCount(long lastDayOkCount) {
+		this.lastDayOkCount = lastDayOkCount;
 	}
-	public long getTodayMinMills() {
-		return todayMinMills;
+	public long getLastDayErrorCount() {
+		return lastDayErrorCount;
 	}
-	public void setTodayMinMills(long todayMinMills) {
-		this.todayMinMills = todayMinMills;
+	public void setLastDayErrorCount(long lastDayErrorCount) {
+		this.lastDayErrorCount = lastDayErrorCount;
 	}
-	public long getTodayMaxMills() {
-		return todayMaxMills;
+	public long getLastDayMinMills() {
+		return lastDayMinMills;
 	}
-	public void setTodayMaxMills(long todayMaxMills) {
-		this.todayMaxMills = todayMaxMills;
+	public void setLastDayMinMills(long lastDayMinMills) {
+		this.lastDayMinMills = lastDayMinMills;
 	}
-	public long getTodayAvgMills() {
-		return todayAvgMills;
+	public long getLastDayMaxMills() {
+		return lastDayMaxMills;
 	}
-	public void setTodayAvgMills(long todayAvgMills) {
-		this.todayAvgMills = todayAvgMills;
+	public void setLastDayMaxMills(long lastDayMaxMills) {
+		this.lastDayMaxMills = lastDayMaxMills;
+	}
+	public long getLastDayAvgMills() {
+		return lastDayAvgMills;
+	}
+	public void setLastDayAvgMills(long lastDayAvgMills) {
+		this.lastDayAvgMills = lastDayAvgMills;
+	}
+	public Date getLastDayMaxInvokeAt() {
+		return lastDayMaxInvokeAt;
+	}
+	public void setLastDayMaxInvokeAt(Date lastDayMaxInvokeAt) {
+		this.lastDayMaxInvokeAt = lastDayMaxInvokeAt;
 	}
 	public long getLastMills() {
 		return lastMills;
@@ -122,19 +134,7 @@ public class MethodAccessInfo {
 	public Date getLastInvokeAt() {
 		return lastInvokeAt;
 	}
-	public void setLastInvokeAt(Date lastInvokeTime) {
-		this.lastInvokeAt = lastInvokeTime;
-	}
-	public Date getMaxInvokeAt() {
-		return maxInvokeAt;
-	}
-	public void setMaxInvokeAt(Date maxInvokeAt) {
-		this.maxInvokeAt = maxInvokeAt;
-	}
-	public Date getTodayMaxInvokeAt() {
-		return todayMaxInvokeAt;
-	}
-	public void setTodayMaxInvokeAt(Date todayMaxInvokeAt) {
-		this.todayMaxInvokeAt = todayMaxInvokeAt;
+	public void setLastInvokeAt(Date lastInvokeAt) {
+		this.lastInvokeAt = lastInvokeAt;
 	}
 }
