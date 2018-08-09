@@ -24,22 +24,24 @@ public class EzProfilerConfigure {
 {
 	"DemoController": [{
 		"method": "hello",//方法名
-		"uri": "/hello",//访问url
-		"invokeCount": 4,//调用的总次数
-		"okCount": 4,//成功的次数
-		"errorCount": 0,//错误的次数
-		"minMills": 2,//最小时间
-		"maxMills": 33,//最大时间
-		"avgMills": 6,//平均时间
-		"todayCount": 4,//今天的调用次数
-		"todayOkCount": 4,//今天成功的次数
-		"todayErrorCount": 0,//今天失败的次数
-		"todayMinMills": 2,//今天最小时间
-		"todayMaxMills": 33,//今天最大时间
-		"todayAvgMills": 6,//今天平均时间
-		"lastMills": 3,//上次调用花费的时间
-		"lastInvokeTime": 1523533964865//上次调用时间点
-	},]
+		"uri": "/hello",     //url路径
+		"invokeCount": 2,  //总的调用次数
+		"okCount": 2,       //总的成功的次数
+		"errorCount": 0,   //总的失败的次数
+		"minMills": 0,       //最小用时
+		"maxMills": 0,      //最大用时
+		"avgMills": 0,       //平均用时
+		"maxInvokeAt": "2018-08-09 10:28:08", //最大用时发生时间点
+		"lastDayCount": 2,  //最近一天总调用次数
+		"lastDayOkCount": 2,//最近一天成功次数
+		"lastDayErrorCount": 0,//最近一天失败次数
+		"lastDayMinMills": 0,//最近一天最小用时
+		"lastDayMaxMills": 0,//最近一天最大用时
+		"lastDayAvgMills": 0,//最近一天平均用时
+		"lastDayMaxInvokeAt": "2018-08-09 10:28:12",//最近一天最大用时发生时间点
+		"lastMills": 0,       //上次用时
+		"lastInvokeAt": "2018-08-09 10:30:11"//上次调用时间点
+	}]
 }
 ```
 
