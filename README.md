@@ -4,7 +4,12 @@
 
 ## 使用方式
 
-1. 添加依赖，首先手动下载源码，执行maven clean install
+1.安装依赖
+```sh
+下载源码，命令行执行：maven clean install
+```
+
+2. 添加依赖
 ```xml
 <dependency>
   <groupId>com.github.xjs</groupId>
@@ -12,14 +17,14 @@
   <version>0.0.1-SNAPSHOT</version>
 </dependency>
 ```
-2. 添加配置
+3. 添加配置
 ```java
 @EnableProfiler
 @Configuration
 public class EzProfilerConfigure {
 }
 ```
-3.项目启动以后，访问浏览器 http://localhost:8080/profiler , 输出结果类似：
+4.项目启动以后，访问浏览器 http://localhost:8080/profiler , 输出结果类似：
 ```json
 {
 	"DemoController": [{
