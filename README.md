@@ -4,7 +4,7 @@
 
 ## 使用方式
 
-1. 添加依赖
+1. 添加依赖，首先手动下载源码，执行maven clean install
 ```xml
 <dependency>
   <groupId>com.github.xjs</groupId>
