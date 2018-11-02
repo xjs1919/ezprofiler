@@ -10,13 +10,11 @@ import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.github.xjs.ezprofiler.annotation.Profiler;
 import com.github.xjs.ezprofiler.config.EzProfilerProperties;
@@ -53,9 +51,7 @@ public class ControllerScaner implements BeanPostProcessor{
 		if(beanClassName.startsWith("org.springframework") || beanClassName.indexOf("EzProfilerController")>=0) {
 			return bean;
 		}
-		Controller controllerAnno = AnnotationUtils.findAnnotation(beanClass, Controller.class);
-		RestController restControllerAnno = AnnotationUtils.findAnnotation(beanClass, RestController.class);
-		if(controllerAnno == null && restControllerAnno == null) {
+		if(!AnnotatedElementUtils.hasAnnotation(beanClass, Controller.class)) {
 			return bean;
 		}
 		Profiler profiler = AnnotationUtils.findAnnotation(beanClass, Profiler.class);
@@ -74,27 +70,17 @@ public class ControllerScaner implements BeanPostProcessor{
 					return method.invoke(bean, invocation.getArguments());
 				}
 				//不是一个requestMapping方法
-				GetMapping getMappingAnnotation = AnnotationUtils.findAnnotation(method, GetMapping.class);
-				PostMapping postMappingAnnotation = AnnotationUtils.findAnnotation(method, PostMapping.class);
-				RequestMapping requestMappingAnnotation = AnnotationUtils.findAnnotation(method, RequestMapping.class);
-				if(requestMappingAnnotation == null && getMappingAnnotation == null && postMappingAnnotation == null) {
+				RequestMapping requestMappingAnnotation = AnnotatedElementUtils.getMergedAnnotation(method, RequestMapping.class);
+				if(requestMappingAnnotation == null) {
 					return method.invoke(bean, invocation.getArguments());
 				}
 				//开始统计
-				String uri = null;
+				String uri = "";
 				long startAt = 0;
 				long endAt = 0;
 				boolean occurError=true;
 				try {
-					if(getMappingAnnotation !=null) {
-						uri = getMappingAnnotation.value()[0];
-					}else if(postMappingAnnotation != null) {
-						uri = postMappingAnnotation.value()[0];
-					}else if(requestMappingAnnotation != null) {
-						uri = requestMappingAnnotation.value()[0];
-					}else {
-						throw new RuntimeException("impossible");
-					}
+					uri = requestMappingAnnotation.value()[0];
 					startAt = System.currentTimeMillis();
 					Object result = method.invoke(bean, invocation.getArguments());
 					endAt = System.currentTimeMillis();
